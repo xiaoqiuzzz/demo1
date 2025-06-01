@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.demo1.dao.BookMapper">
+
+    <select id="findAllBooks" resultType="com.demo1.entity.Book">
+        SELECT * FROM books
+<!--        SELECT-->
+<!--            book_id AS bookId,-->
+<!--            book_name AS bookName,-->
+<!--            book_status AS bookStatus-->
+<!--        FROM books-->
+    </select>
+
+    <select id="findBookById" resultType="com.demo1.entity.Book">
+        SELECT * FROM books WHERE book_id = #{bookId}
+    </select>
+
+    <insert id="insertBook" useGeneratedKeys="true" keyProperty="bookId">
+        INSERT INTO books (book_name, book_status)
+        VALUES (#{bookName}, #{bookStatus})
+    </insert>
+
+    <update id="updateBook">
+        UPDATE books SET book_status = #{bookStatus}
+        WHERE book_id = #{bookId}
+    </update>
+
+    <delete id="deleteBook">
+        DELETE FROM books WHERE book_id = #{bookId}
+    </delete>
+
+    <delete id="deleteAll">
+        DELETE FROM books
+    </delete>
+
+    <delete id="truncateAll">
+        TRUNCATE TABLE books
+    </delete>
+
+</mapper>

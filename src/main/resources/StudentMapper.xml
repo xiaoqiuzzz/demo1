@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.demo1.dao.StudentMapper">
+
+    <select id="findAllStudents" resultType="com.demo1.entity.Student">
+        SELECT * FROM students
+    </select>
+
+    <select id="findStudentById" resultType="com.demo1.entity.Student">
+        SELECT * FROM students WHERE student_id = #{studentId}
+    </select>
+
+    <insert id="insertStudent" useGeneratedKeys="true" keyProperty="studentId">
+        INSERT INTO students (student_name, email)
+        VALUES (#{studentName}, #{email})
+    </insert>
+
+    <update id="updateStudent">
+        UPDATE students SET email = #{email}
+        WHERE student_id = #{studentId}
+    </update>
+
+    <delete id="deleteStudent">
+        DELETE FROM students WHERE student_id = #{studentId}
+    </delete>
+
+    <delete id="deleteAll">
+        DELETE FROM students
+    </delete>
+
+    <delete id="truncateAll">
+        TRUNCATE TABLE students
+    </delete>
+</mapper>

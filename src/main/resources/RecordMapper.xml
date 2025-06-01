@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.demo1.dao.RecordMapper">
+
+
+    <select id="findAllRecords" resultType="com.demo1.entity.Record">
+        SELECT * FROM records
+    </select>
+
+    <select id="findRecordId">
+        SELECT record_id FROM records WHERE student_id = #{studentId} AND book_id = #{bookId}
+    </select>
+
+    <select id="findRecordById" resultType="com.demo1.entity.Record">
+        SELECT * FROM records WHERE record_id = #{recordId}
+    </select>
+
+    <select id="findRecordByStudentId" resultType="com.demo1.entity.Record">
+        SELECT * FROM records WHERE student_id = #{studentId}
+    </select>
+
+    <select id="findRecordByBookId" resultType="com.demo1.entity.Record">
+        SELECT * FROM records WHERE book_id = #{bookId}
+    </select>
+
+    <insert id="insertRecord" useGeneratedKeys="true" keyProperty="recordId">
+        INSERT INTO records (student_id, email, book_id, record_status)
+        VALUES (#{studentId}, #{email}, #{bookId}, #{recordStatus})
+    </insert>
+
+    <update id="updateRecord">
+        UPDATE records
+        <set>
+            <if test="studentId != null">student_id = #{studentId},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="bookId != null">book_id = #{bookId},</if>
+            <if test="recordStatus != null">record_status = #{recordStatus},</if>
+        </set>
+        WHERE record_id = #{recordId}
+    </update>
+
+    <delete id="deleteRecord">
+        DELETE FROM records WHERE record_id = #{recordId}
+    </delete>
+
+    <delete id="deleteAll">
+        DELETE FROM records
+    </delete>
+
+    <delete id="truncateAll">
+        TRUNCATE TABLE records
+    </delete>
+
+</mapper>
